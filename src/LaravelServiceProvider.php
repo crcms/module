@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Class LaravelServiceProvider
  *
- * @package CrCms\ElasticSearch
+ * @package CrCms\Module
  * @author simon
  */
 class LaravelServiceProvider extends ServiceProvider
