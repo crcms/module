@@ -2,20 +2,37 @@
 
 namespace CrCms\Module;
 
+use CrCms\Module\Commands\ModuleMakeCommand;
+use CrCms\Module\Commands\ModuleRemoveCommand;
+use CrCms\Module\Commands\ModuleStatusCommand;
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class LaravelServiceProvider
  *
- * @package CrCms\Module
+ * @package CrCms\ElasticSearch
  * @author simon
  */
 class LaravelServiceProvider extends ServiceProvider
 {
     /**
+     * @var bool
+     */
+    protected $defer = false;
+
+    /**
      * @var string
      */
     protected $packagePath = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+
+    /**
+     * @var array
+     */
+    protected $commands = [
+        ModuleMakeCommand::class,
+        ModuleRemoveCommand::class,
+        ModuleStatusCommand::class,
+    ];
 
     /**
      * @return void
@@ -34,6 +51,17 @@ class LaravelServiceProvider extends ServiceProvider
     {
         //merge config
         $this->mergeConfig();
+
+        //register commands
+        $this->registerCommands();
+    }
+
+    /**
+     * @return void
+     */
+    protected function registerCommands()
+    {
+        $this->commands($this->commands);
     }
 
     /**
@@ -45,5 +73,13 @@ class LaravelServiceProvider extends ServiceProvider
         if (file_exists($configFile)) {
             $this->mergeConfigFrom($configFile, 'module');
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function provides(): array
+    {
+        return $this->commands;
     }
 }
