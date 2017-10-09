@@ -59,8 +59,8 @@ final class Helper
     public static function createFile(string $path,string $content): bool
     {
         $basePath = dirname($path);
-        if (!is_dir($path)) {
-            static::createDir($path);
+        if (!is_dir($basePath)) {
+            static::createDir($basePath);
         }
         return (bool)file_put_contents($path,$content);
     }
