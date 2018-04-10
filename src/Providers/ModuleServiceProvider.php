@@ -64,7 +64,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
             return ;
         }
 
-        foreach (file($file) as $provider) {
+        foreach (file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $provider) {
             if (class_exists($provider) && !$this->app->getProvider($provider)) {
                 $this->app->register($provider);
             }
