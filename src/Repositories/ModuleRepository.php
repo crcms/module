@@ -4,6 +4,7 @@ namespace CrCms\Module\Repositories;
 
 use CrCms\Foundation\App\Repositories\AbstractRepository;
 use CrCms\Module\Models\ModuleModel;
+use Illuminate\Support\Collection;
 
 class ModuleRepository extends AbstractRepository
 {
@@ -38,5 +39,14 @@ class ModuleRepository extends AbstractRepository
         return $this->all()->map(function (ModuleModel $model) {
             return $model->namespace;
         })->toArray();
+    }
+
+    /**
+     * @param array $ids
+     * @return Collection
+     */
+    public function byIds(array $ids): Collection
+    {
+        return $this->whereIn('id',$ids)->get();
     }
 }
