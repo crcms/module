@@ -41,7 +41,6 @@ class ModuleController extends Controller
     public function store(StoreRequest $request)
     {
         $model = $this->repository->create($request->all());
-
         return $this->response->resource($model, ModuleResource::class);
     }
 
@@ -53,7 +52,6 @@ class ModuleController extends Controller
     public function update(UpdateRequest $request,int $id)
     {
         $model = $this->repository->update($request->all(), $id);
-
         return $this->response->resource($model, ModuleResource::class);
     }
 
