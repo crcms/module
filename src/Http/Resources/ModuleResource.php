@@ -17,7 +17,7 @@ class ModuleResource extends Resource
             'id' => $this->id,
             'name' => $this->name,
             'sign' => $this->sign,
-            'status' => ModuleAttribute::getStaticAttributes(ModuleAttribute::KEY_STATUS . '.' . strval($this->status)),
+            'status' => ModuleAttribute::getStaticTransform(ModuleAttribute::KEY_STATUS . '.' . strval($this->status)),
             'namespace' => $this->namespace,
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
